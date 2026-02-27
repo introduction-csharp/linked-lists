@@ -59,5 +59,35 @@ public sealed class BasicLinkedListTests
         Assert.AreEqual("{3, 5, 7, 9}", ill.ToString());
     }
 
+    [TestMethod]
+    public void TestDeleteWhenPresent()
+    {
+        var ill = new IntegerLinkedList(5);
+        ill.Append(7);
+        ill.Append(9);
+        Assert.IsTrue(ill.Delete(7));
+        Assert.AreEqual("{5, 9}", ill.ToString());
+    }
+
+    [TestMethod]
+    public void TestDeleteHead()
+    {
+        var ill = new IntegerLinkedList(5);
+        ill.Append(7);
+        ill.Append(9);
+        Assert.IsTrue(ill.Delete(5));
+        Assert.AreEqual("{7, 9}", ill.ToString());
+    }
+
+    [TestMethod]
+    public void TestDeleteWhenNotPresent()
+    {
+        var ill = new IntegerLinkedList(5);
+        ill.Append(7);
+        ill.Append(9);
+        Assert.IsFalse(ill.Delete(6));
+        Assert.AreEqual("{5, 7, 9}", ill.ToString());
+    }
+
 
 }
