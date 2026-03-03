@@ -89,5 +89,18 @@ public sealed class BasicLinkedListTests
         Assert.AreEqual("{5, 7, 9}", ill.ToString());
     }
 
+    [TestMethod]
+    public void TestInserts()
+    {
+        var ill = new IntegerLinkedList(5);
+        ill.Append(7);
+        ill.Append(9);
+        Assert.IsTrue(ill.Insert(8, 0));
+        Assert.AreEqual("{8, 5, 7, 9}", ill.ToString());
+        Assert.IsTrue(ill.Insert(8, 3));
+        Assert.AreEqual("{8, 5, 7, 8, 9}", ill.ToString());
+        Assert.IsFalse(ill.Insert(8, 94));
+    }
+
 
 }

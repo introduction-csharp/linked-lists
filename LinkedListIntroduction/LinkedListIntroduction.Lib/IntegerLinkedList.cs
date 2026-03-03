@@ -42,6 +42,8 @@ public class IntegerLinkedList
 
     public bool Delete(int doomed)
     {
+        if(_head == null)
+            return false;
         if(_head.Value == doomed)
         {
             _head = _head.Next; 
@@ -49,6 +51,20 @@ public class IntegerLinkedList
         } 
         return _head.Delete(doomed);        
     }
+
+    public bool Insert(int value, int position)
+    {
+        if(position == 0) 
+        { 
+            Prepend(value);
+            return true;
+        }
+        if(_head == null)
+            return false;
+        else 
+            return _head.Insert(value, position-1);
+        
+}
 
     public override string ToString()
     {
@@ -106,6 +122,17 @@ public class IntegerNode
 
     }
 
+    internal bool Insert(int value, int position)
+    {
+        if(position == 0)
+        {
+            _next = new IntegerNode(value, _next);
+            return true;            
+        }
+        if(_next == null) 
+            return false;
+        return _next.Insert(value, position-1);
+    }
     public override string ToString()
     {
         return _next == null ? _value.ToString() : $"{_value}, {_next}";
