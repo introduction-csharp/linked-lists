@@ -118,4 +118,12 @@ public sealed class BasicLinkedListTests
         Assert.AreEqual("{5, 7, 9, 11, 13, 17}", ill.ToString());
     }
 
+    [TestMethod]
+    public void TestReverse()
+    {
+        var ill = new IntegerLinkedList([5,7,9]);
+        var ill2 = ill.Reverse();
+        Assert.AreEqual("{9, 7, 5}", ill2.ToString());
+    }
+
 }

@@ -1,4 +1,7 @@
-﻿namespace LinkedListIntroduction.Lib;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices;
+
+namespace LinkedListIntroduction.Lib;
 
 
 public class IntegerLinkedList
@@ -13,6 +16,11 @@ public class IntegerLinkedList
     public IntegerLinkedList(int v)
     {
         _head = new IntegerNode(v);
+    }
+
+    internal IntegerLinkedList(IntegerNode n)
+    {
+        _head = n;
     }
 
     public IntegerLinkedList(IList<int> ls) : this()
@@ -83,6 +91,14 @@ public class IntegerLinkedList
             else 
                 _head.Join(other._head);
         }
+    }
+
+    public IntegerLinkedList Reverse()
+    {
+        if(_head == null)
+            return new IntegerLinkedList();
+        return new IntegerLinkedList(_head.Reverse()); 
+            
     }
 
     public override string ToString()
@@ -160,6 +176,25 @@ public class IntegerNode
         else 
             _next.Join(other);
     }
+
+    internal IntegerNode Reverse()
+    {
+        IntegerNode newMe = new IntegerNode(_value);
+        if(_next == null)
+            return newMe;
+        else
+            return _next.Reverse(newMe);    
+    }
+
+    IntegerNode Reverse(IntegerNode previous)
+    {
+        IntegerNode newMe = new IntegerNode(_value, previous); 
+        if(_next == null)
+            return newMe;
+        return _next.Reverse(newMe);
+    }
+
+
     public override string ToString()
     {
         return _next == null ? _value.ToString() : $"{_value}, {_next}";
