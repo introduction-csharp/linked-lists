@@ -15,6 +15,12 @@ public class IntegerLinkedList
         _head = new IntegerNode(v);
     }
 
+    public IntegerLinkedList(IList<int> ls) : this()
+    {
+        foreach(int i in ls) 
+            Append(i);          
+    }
+
     public int Count => _head == null ? 0 : _head.Count;
     public int Sum => _head == null ? 0 : _head.Sum;
 
@@ -63,8 +69,21 @@ public class IntegerLinkedList
             return false;
         else 
             return _head.Insert(value, position-1);
-        
-}
+
+    }
+
+    public void Join(IntegerLinkedList? other)
+    {
+        if(other == null)
+            return;
+        else 
+        {
+            if(_head == null)
+                _head = other._head;
+            else 
+                _head.Join(other._head);
+        }
+    }
 
     public override string ToString()
     {
@@ -132,6 +151,14 @@ public class IntegerNode
         if(_next == null) 
             return false;
         return _next.Insert(value, position-1);
+    }
+
+    internal void Join(IntegerNode other)
+    {
+        if(_next == null)
+            _next = other;
+        else 
+            _next.Join(other);
     }
     public override string ToString()
     {

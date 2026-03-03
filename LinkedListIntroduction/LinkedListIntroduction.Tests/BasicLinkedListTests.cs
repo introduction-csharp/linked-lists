@@ -102,5 +102,20 @@ public sealed class BasicLinkedListTests
         Assert.IsFalse(ill.Insert(8, 94));
     }
 
+    [TestMethod]
+    public void TestListInitialisation()
+    {
+        var ill = new IntegerLinkedList([5,7,9]);
+        Assert.AreEqual("{5, 7, 9}", ill.ToString());
+    }
+
+    [TestMethod]
+    public void TestJoin()
+    {
+        var ill = new IntegerLinkedList([5,7,9]);
+        var ill2 = new IntegerLinkedList([11,13,17]);
+        ill.Join(ill2);
+        Assert.AreEqual("{5, 7, 9, 11, 13, 17}", ill.ToString());
+    }
 
 }
