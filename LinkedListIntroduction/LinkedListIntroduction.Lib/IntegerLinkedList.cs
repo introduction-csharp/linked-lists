@@ -101,13 +101,20 @@ public class IntegerLinkedList
             
     }
 
+    public bool Contains(int target)
+    {
+        if(_head == null)
+            return false;
+        return _head.Contains(target);
+    }
+
     public override string ToString()
     {
         return _head == null ? "{}" : $"{{{_head}}}";
     }
 }
 
-public class IntegerNode
+class IntegerNode
 {
     int _value;
     IntegerNode? _next;
@@ -117,7 +124,6 @@ public class IntegerNode
     internal int Count => _next == null ? 1 : 1 + _next.Count;
             
     internal int Sum => _next == null ? _value : _value + _next.Sum;
-
 
     internal IntegerNode(int v)
     {
@@ -194,6 +200,14 @@ public class IntegerNode
         return _next.Reverse(newMe);
     }
 
+    public bool Contains(int target)
+    {
+        if(_value == target)
+            return true;
+        if(_next == null)
+            return false;
+        return _next.Contains(target);
+    }
 
     public override string ToString()
     {

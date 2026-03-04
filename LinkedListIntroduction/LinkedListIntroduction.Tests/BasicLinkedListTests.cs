@@ -126,4 +126,14 @@ public sealed class BasicLinkedListTests
         Assert.AreEqual("{9, 7, 5}", ill2.ToString());
     }
 
+    [TestMethod]
+    public void TestContains()
+    {
+        var ill = new IntegerLinkedList([5,7,3,9]);
+        Assert.IsTrue(ill.Contains(5));
+        Assert.IsTrue(ill.Contains(3));
+        Assert.IsTrue(ill.Contains(9));
+        Assert.IsFalse(ill.Contains(4));
+    }
+
 }
