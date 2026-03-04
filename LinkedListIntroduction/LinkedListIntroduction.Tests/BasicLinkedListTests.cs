@@ -136,4 +136,11 @@ public sealed class BasicLinkedListTests
         Assert.IsFalse(ill.Contains(4));
     }
 
+    [TestMethod]
+    public void TestRemoveDuplicates()
+    {
+        var ill = new IntegerLinkedList([5,7,5,7,7,9,11,3,5,11]);
+        ill.RemoveDuplicates();
+        Assert.AreEqual("{5, 7, 9, 11, 3}", ill.ToString());
+    }
 }

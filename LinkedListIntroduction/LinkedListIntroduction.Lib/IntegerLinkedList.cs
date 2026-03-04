@@ -108,13 +108,21 @@ public class IntegerLinkedList
         return _head.Contains(target);
     }
 
+    public void RemoveDuplicates()
+    {
+        if(_head == null)
+            return;
+        // this does not need to worry about the value of the head because the head must be the first instance of any value 
+        _head.RemoveDuplicates();
+    }
+
     public override string ToString()
     {
         return _head == null ? "{}" : $"{{{_head}}}";
     }
 }
 
-class IntegerNode
+class IntegerNode 
 {
     int _value;
     IntegerNode? _next;
@@ -183,16 +191,8 @@ class IntegerNode
             _next.Join(other);
     }
 
-    internal IntegerNode Reverse()
-    {
-        IntegerNode newMe = new IntegerNode(_value);
-        if(_next == null)
-            return newMe;
-        else
-            return _next.Reverse(newMe);    
-    }
 
-    IntegerNode Reverse(IntegerNode previous)
+    internal IntegerNode Reverse(IntegerNode? previous = null)
     {
         IntegerNode newMe = new IntegerNode(_value, previous); 
         if(_next == null)
@@ -209,9 +209,23 @@ class IntegerNode
         return _next.Contains(target);
     }
 
+    internal void RemoveDuplicates()
+    {
+        if(_next == null)
+            return;
+        while(_next.Contains(_value)) 
+            Delete(_value);
+        _next.RemoveDuplicates();
+        
+    }
+
     public override string ToString()
     {
         return _next == null ? _value.ToString() : $"{_value}, {_next}";
     }
 
+    public int CompareTo(IntegerNode? other)
+    {
+        throw new NotImplementedException();
+    }
 }
