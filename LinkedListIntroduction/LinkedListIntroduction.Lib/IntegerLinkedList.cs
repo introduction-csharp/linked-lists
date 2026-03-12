@@ -18,7 +18,7 @@ public class IntegerLinkedList
         _head = new IntegerNode(v);
     }
 
-    internal IntegerLinkedList(IntegerNode n)
+    internal IntegerLinkedList(IntegerNode? n)
     {
         _head = n;
     }
@@ -120,6 +120,15 @@ public class IntegerLinkedList
     {
         return _head == null ? "{}" : $"{{{_head}}}";
     }
+
+    public IntegerLinkedList Merge(IntegerLinkedList ill2)
+    {
+        if(_head == null)
+            return ill2;
+        if(ill2._head == null)
+            return this;
+        return new IntegerLinkedList(_head.Merge(ill2._head));
+    }  
 }
 
 class IntegerNode 
@@ -192,12 +201,12 @@ class IntegerNode
     }
 
 
-    internal IntegerNode Reverse(IntegerNode? previous = null)
+    internal IntegerNode Reverse(IntegerNode? tail = null)
     {
-        IntegerNode newMe = new IntegerNode(_value, previous); 
+        IntegerNode head = new IntegerNode(_value, tail); 
         if(_next == null)
-            return newMe;
-        return _next.Reverse(newMe);
+            return head;
+        return _next.Reverse(head);
     }
 
     public bool Contains(int target)
@@ -217,6 +226,13 @@ class IntegerNode
             Delete(_value);
         _next.RemoveDuplicates();
         
+    }
+
+    internal IntegerNode? Merge(IntegerNode n)
+    {
+        if(Next == null)
+            return new(Value, n);
+        return new(_value, n.Merge(Next));        
     }
 
     public override string ToString()

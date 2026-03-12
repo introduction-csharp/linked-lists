@@ -143,4 +143,18 @@ public sealed class BasicLinkedListTests
         ill.RemoveDuplicates();
         Assert.AreEqual("{5, 7, 9, 11, 3}", ill.ToString());
     }
+
+    [TestMethod]
+    public void TestMerge()
+    {
+        IntegerLinkedList ill1 = new([1,2,3]);
+        IntegerLinkedList ill2 = new([4,5,6]);
+
+        IntegerLinkedList ill3 = ill1.Merge(ill2);
+
+        Assert.AreEqual(6, ill3.Count);
+        Assert.AreEqual("{1, 4, 2, 5, 3, 6}", ill3.ToString());
+
+        
+    }
 }
